@@ -231,8 +231,10 @@ pub fn panel_menu_popup(app: &mut FilmcraftApp, ui: &mut egui::Ui) {
                     let _ = app.session.execute("sequence.revealInProject", serde_json::json!({}));
                     close = true;
                 }
-                ui.checkbox(&mut app.ui.timeline.show_thumbnails, app.tr("Video Thumbnails"));
-                ui.checkbox(&mut app.ui.timeline.show_waveforms, app.tr("Audio Waveforms"));
+                let show_thumbs = app.tr("Video Thumbnails");
+                let show_waves = app.tr("Audio Waveforms");
+                ui.checkbox(&mut app.ui.timeline.show_thumbnails, show_thumbs);
+                ui.checkbox(&mut app.ui.timeline.show_waveforms, show_waves);
             }
             if p == PanelKind::Project {
                 ui.separator();
