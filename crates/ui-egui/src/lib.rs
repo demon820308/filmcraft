@@ -1473,8 +1473,11 @@ impl eframe::App for FilmcraftApp {
     fn logic(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         if !self.styled {
             theme::install(ctx, &self.tokens);
-            // theme::install replaces the fonts: add the system Japanese/Chinese font back (or fall back to
-            // English when a saved setting meets a system without one)
+            // Pre-install available Chinese and Japanese font fallbacks so CJK characters (including
+            // the Language menu item itself) render properly even when English is active.
+            let _ = i18n::install_chinese_font(ctx);
+            let _ = i18n::install_japanese_font(ctx);
+            // Verify active language meets font requirements (or fall back to English)
             if self.ui.language == i18n::Language::Ja && !i18n::install_japanese_font(ctx) {
                 self.ui.language = i18n::Language::En;
             } else if self.ui.language == i18n::Language::ZhCn && !i18n::install_chinese_font(ctx) {
