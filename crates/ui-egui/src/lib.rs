@@ -380,9 +380,12 @@ impl FilmcraftApp {
         let frames = Arc::new(FrameServer::new(session.media.clone(), session.services.clone(), session.previews.clone(), FrameServer::default_workers()));
         let workspaces =
             session.prefs_path.as_ref().and_then(|p| p.parent()).map(|d| dock::WorkspacePrefs::load(&d.join(dock::WORKSPACES_FILE))).unwrap_or_default();
+        let language = crate::i18n::Language::parse(&session.prefs.appearance.language).unwrap_or_default();
+        let mut ui = UiState::default();
+        ui.language = language;
         Self {
             session,
-            ui: UiState::default(),
+            ui,
             tokens: Tokens::for_kind(ThemeKind::Dark),
             frames,
             playback: Playback { speed: 1.0, ..Default::default() },
@@ -481,6 +484,13 @@ impl FilmcraftApp {
         let prev = self.applied_prefs.take();
         if prev.as_ref().is_none_or(|q| q.appearance != p.appearance || q.general.show_tool_tips != p.general.show_tool_tips) {
             self.set_theme(ctx, ThemeKind::from_pref(&p.appearance.color_theme));
+            let mut lang = crate::i18n::Language::parse(&p.appearance.language).unwrap_or(crate::i18n::Language::En);
+            if lang == crate::i18n::Language::ZhCn && !crate::i18n::install_chinese_font(ctx) {
+                lang = crate::i18n::Language::En;
+            } else if lang == crate::i18n::Language::Ja && !crate::i18n::install_japanese_font(ctx) {
+                lang = crate::i18n::Language::En;
+            }
+            self.ui.language = lang;
         }
         self.frames.set_cache_budget(p.memory.frame_cache_mb as usize * (1 << 20));
         self.ui.play_after_render = p.timeline.play_after_rendering;

@@ -2191,13 +2191,42 @@ mod tests {
         assert_eq!(restored.language, Language::PtBr);
         crate::menus::invoke(&mut app, &ctx, "app.language.chinese", serde_json::json!({})).unwrap();
         assert_eq!(app.ui.language, Language::ZhCn);
+        assert_eq!(app.session.prefs.appearance.language, "zh-cn");
         assert!(crate::menus::menu_items(&app).iter().any(|it| it.id == "app.language.chinese" && it.checked == Some(true)));
         let saved = serde_json::to_string(&app.ui).unwrap();
         assert!(saved.contains("\"language\":\"zh-cn\""), "{saved}");
         let restored: crate::state::UiState = serde_json::from_str(&saved).unwrap();
         assert_eq!(restored.language, Language::ZhCn);
+        // Closing and restarting the app preserves the chosen language
+        let restarted = crate::FilmcraftApp::new(app.session);
+        assert_eq!(restarted.ui.language, Language::ZhCn);
+        assert!(crate::menus::menu_items(&restarted).iter().any(|it| it.id == "app.language.chinese" && it.checked == Some(true)));
+        let mut app = restarted;
         crate::menus::invoke(&mut app, &ctx, "app.language.english", serde_json::json!({})).unwrap();
         assert_eq!(app.ui.language, Language::En);
+        assert_eq!(app.session.prefs.appearance.language, "en");
+    }
+
+    #[test]
+    fn language_persists_across_restart_with_preferences_file() {
+        let dir = filmcraft_engine::temp_dir().join("filmcraft-lang-persist-test");
+        let _ = std::fs::remove_dir_all(&dir);
+        let mut session = filmcraft_engine::Session::default();
+        session.start_autosave(filmcraft_engine::autosave::AutosaveConfig::new(&dir)).unwrap();
+        let mut app = crate::FilmcraftApp::new(session);
+        let ctx = egui::Context::default();
+        crate::menus::invoke(&mut app, &ctx, "app.language.chinese", serde_json::json!({})).unwrap();
+        assert_eq!(app.ui.language, Language::ZhCn);
+        app.session.shutdown();
+
+        // Simulate reopening the app: loads preferences.json
+        let mut session2 = filmcraft_engine::Session::default();
+        session2.start_autosave(filmcraft_engine::autosave::AutosaveConfig::new(&dir)).unwrap();
+        assert_eq!(session2.prefs.appearance.language, "zh-cn");
+        let app2 = crate::FilmcraftApp::new(session2);
+        assert_eq!(app2.ui.language, Language::ZhCn);
+        assert!(crate::menus::menu_items(&app2).iter().any(|it| it.id == "app.language.chinese" && it.checked == Some(true)));
+        let _ = std::fs::remove_dir_all(&dir);
     }
 
     #[test]

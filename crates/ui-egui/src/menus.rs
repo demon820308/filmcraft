@@ -168,13 +168,15 @@ pub fn invoke(app: &mut FilmcraftApp, ctx: &egui::Context, id: &str, params: Val
         if id == "app.language.chinese" && !crate::i18n::install_chinese_font(ctx) {
             return Err("no Chinese font is installed on this system (for example Microsoft YaHei or PingFang SC); the interface stays in English".into());
         }
-        app.ui.language = match id {
+        let lang = match id {
             "app.language.japanese" => crate::i18n::Language::Ja,
             "app.language.spanish" => crate::i18n::Language::Es,
             "app.language.portuguese" => crate::i18n::Language::PtBr,
             "app.language.chinese" => crate::i18n::Language::ZhCn,
             _ => crate::i18n::Language::En,
         };
+        app.ui.language = lang;
+        let _ = app.session.execute("prefs.set", json!({"key": "appearance.language", "value": lang.code()}));
         let items = menu_items(app);
         if let Some(hook) = app.hooks.shortcuts_changed.as_mut() {
             hook(&items);
