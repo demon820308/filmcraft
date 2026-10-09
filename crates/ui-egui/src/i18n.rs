@@ -59,6 +59,14 @@ impl Language {
     }
 
     pub fn tr(self, text: &str) -> &str {
+        if self == Self::En {
+            return text;
+        }
+        if self == Self::ZhCn {
+            if let Some((_, zh)) = UI_CHINESE.iter().find(|(k, _)| *k == text) {
+                return zh;
+            }
+        }
         let table = match self {
             Self::En => return text,
             Self::Ja => JAPANESE,
@@ -68,6 +76,12 @@ impl Language {
         };
         table.iter().find(|(english, _)| *english == text).map_or(text, |(_, translated)| translated)
     }
+}
+
+/// Helper to translate a string using the language active in `ctx`.
+pub fn tr_ctx<'a>(ctx: &egui::Context, text: &'a str) -> &'a str {
+    let lang = ctx.data(|d| d.get_temp::<Language>(egui::Id::new("interface-language"))).unwrap_or_default();
+    lang.tr(text)
 }
 
 /// Text every Japanese interface font must cover (menus use kanji, hiragana and katakana).
@@ -272,6 +286,7 @@ const SPANISH: &[(&str, &str)] = &[
     ("Clear Markers", "Borrar marcadores"),
     ("Clear Out", "Borrar salida"),
     ("Clear Selected Marker", "Borrar marcador seleccionado"),
+    ("Clip", "Clip"),
     ("Close", "Cerrar"),
     ("Close All Other Projects", "Cerrar todos los demás proyectos"),
     ("Close All Projects", "Cerrar todos los proyectos"),
@@ -622,6 +637,7 @@ const PORTUGUESE: &[(&str, &str)] = &[
     ("Clear Markers", "Limpar marcadores"),
     ("Clear Out", "Limpar saída"),
     ("Clear Selected Marker", "Limpar marcador selecionado"),
+    ("Clip", "Clipe"),
     ("Close", "Fechar"),
     ("Close All Other Projects", "Fechar todos os outros projetos"),
     ("Close All Projects", "Fechar todos os projetos"),
@@ -972,6 +988,7 @@ const CHINESE: &[(&str, &str)] = &[
     ("Clear Markers", "清除标记"),
     ("Clear Out", "清除出点"),
     ("Clear Selected Marker", "清除所选标记"),
+    ("Clip", "剪辑"),
     ("Close", "关闭"),
     ("Close All Other Projects", "关闭所有其他项目"),
     ("Close All Projects", "关闭所有项目"),
@@ -1254,6 +1271,123 @@ const CHINESE: &[(&str, &str)] = &[
     ("Zoom In", "放大"),
     ("Zoom Out", "缩小"),
     ("Zoom to Sequence", "缩放至序列"),
+];
+
+const UI_CHINESE: &[(&str, &str)] = &[
+    // Modes & Header
+    ("Import", "导入"),
+    ("Edit", "剪辑"),
+    ("Export", "导出"),
+    ("Home", "主页"),
+    ("Full screen", "全屏"),
+    ("Volume", "音量"),
+    ("Master volume: use the Audio Track Mixer", "主音量：请使用音频轨道混合器"),
+    ("Search", "搜索"),
+    ("Progress", "进度"),
+    ("Quick Export", "快速导出"),
+    ("Join the ArtCraft Discord (discord.gg/artcraft)", "加入 ArtCraft Discord (discord.gg/artcraft)"),
+    ("Join the ArtCraft Discord", "加入 ArtCraft Discord"),
+    ("Edited", "已编辑"),
+    (" - Edited", " - 已编辑"),
+
+    // Dock Tabs & Panel Chrome
+    ("Timeline: (no sequences)", "时间轴：(无序列)"),
+    ("Close Panel", "关闭面板"),
+    ("Close Other Timeline Panels", "关闭其他时间轴面板"),
+    ("Maximize Frame", "最大化画框"),
+    ("Restore Workspace", "还原工作区"),
+    ("Reveal Sequence in Project", "在项目中显示序列"),
+    ("Video Thumbnails", "视频缩略图"),
+    ("Audio Waveforms", "音频波形"),
+
+    // Placeholders & Empty States
+    ("(no clips)", "(无剪辑)"),
+    ("(no sequences)", "(无序列)"),
+    ("(no sequence)", "(无序列)"),
+    ("(no clip selected)", "(未选择剪辑)"),
+    ("Select a clip to see its properties", "选择剪辑以查看其属性"),
+    ("Select a clip to grade", "选择剪辑以进行调色"),
+    ("Select audio clips to edit them here", "选择音频剪辑在此进行编辑"),
+    ("Open a sequence to export", "打开序列以进行导出"),
+    ("Select a clip to view its metadata.", "选择剪辑以查看其元数据。"),
+    ("Open a sequence to work with captions", "打开序列以处理字幕"),
+    ("Open a sequence to see its transcript", "打开序列以查看其文本转录"),
+    ("Select a graphic clip, or use the Type tool (T) on the Program monitor", "选择图形剪辑，或在节目监视器上使用文字工具 (T)"),
+
+    // Timeline Context Menu (CLIP_MENU)
+    ("Cut", "剪切"),
+    ("Copy", "复制"),
+    ("Paste Attributes…", "粘贴属性…"),
+    ("Remove Attributes…", "删除属性…"),
+    ("Clear", "清除"),
+    ("Ripple Delete", "波纹删除"),
+    ("Edit Original", "编辑原稿"),
+    ("Replace With Clip From Source Monitor", "从源监视器替换剪辑"),
+    ("Enable", "启用"),
+    ("✓ Enable", "✓ 启用"),
+    ("Unlink", "取消链接"),
+    ("Link", "链接"),
+    ("Group", "编组"),
+    ("Ungroup", "解散编组"),
+    ("Synchronize…", "同步…"),
+    ("Merge Clips…", "合并剪辑…"),
+    ("Nest…", "嵌套…"),
+    ("Make Subsequence", "创建子序列"),
+    ("Reveal Nested Sequence", "显示嵌套序列"),
+    ("Multi-Camera", "多机位"),
+    ("Flatten", "拼合"),
+    ("Label", "标签"),
+    ("Speed/Duration…", "速度/持续时间…"),
+    ("Frame Hold Options…", "定格帧选项…"),
+    ("Add Frame Hold", "添加定格帧"),
+    ("Insert Frame Hold Segment", "插入定格帧段"),
+    ("Field Options…", "场选项…"),
+    ("Scale to Frame Size", "缩放为帧大小"),
+    ("Fit to frame", "适合帧大小"),
+    ("Fill frame", "填充帧大小"),
+    ("Reveal in Project", "在项目中显示"),
+    ("Join Through Edits", "结合全通编辑"),
+
+    // Project Panel
+    ("Find…", "查找…"),
+    ("List View", "列表视图"),
+    ("Icon View", "图标视图"),
+    ("Freeform View", "自由形式视图"),
+    ("Freeform View Options…", "自由形式视图选项…"),
+    ("Sort Icons", "排列图标"),
+    ("Zoom", "缩放"),
+    ("Open in Place", "在此处打开"),
+    ("Open in New Tab", "在新标签页中打开"),
+    ("Open in New Window", "在新窗口中打开"),
+    ("Rename", "重命名"),
+    ("New Bin", "新建素材箱"),
+    ("Interpret Footage…", "解释素材…"),
+    ("Make Subclip…", "创建子剪辑…"),
+    ("Edit Subclip…", "编辑子剪辑…"),
+    ("Convert to Master Clip", "转换为主要剪辑"),
+    ("Link Media…", "链接媒体…"),
+    ("Make Offline…", "设为脱机…"),
+    ("Proxy", "代理"),
+    ("Create Proxies…", "创建代理…"),
+    ("Attach Proxies…", "附加代理…"),
+    ("Reconnect Full Resolution Media…", "重新连接全分辨率媒体…"),
+    ("Detach Proxies", "脱机代理"),
+    ("Stack", "堆叠"),
+
+    // Monitor Controls
+    ("RGBA Channels", "RGBA 通道"),
+    ("Composite Video", "复合视频"),
+    ("Alpha", "Alpha 通道"),
+    ("Red", "红色"),
+    ("Green", "绿色"),
+    ("Blue", "蓝色"),
+    ("Comparison View", "对比视图"),
+    ("Audio Waveform", "音频波形"),
+    ("Video and Audio Waveform Split", "音视频波形分割"),
+    ("Playback Resolution", "播放分辨率"),
+    ("Paused Resolution", "暂停分辨率"),
+    ("Fit", "适合"),
+    ("Full", "完整"),
 ];
 
 const JAPANESE: &[(&str, &str)] = &[

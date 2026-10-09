@@ -647,42 +647,42 @@ pub fn wrench_items(app: &mut FilmcraftApp, ui: &mut egui::Ui, w: Which) {
     let v = view(app, w).clone();
     let mode = v.display_mode();
     let mut out: Picks = Vec::new();
-    pick(ui, &mut out, "display.composite", "Composite Video", mode == Some(DisplayMode::Composite));
-    ui.menu_button("RGBA Channels", |ui| {
+    pick(ui, &mut out, "display.composite", app.tr("Composite Video"), mode == Some(DisplayMode::Composite));
+    ui.menu_button(app.tr("RGBA Channels"), |ui| {
         for (k, l, m) in [
             ("alpha", "Alpha", DisplayMode::Alpha),
             ("red", "Red", DisplayMode::Red),
             ("green", "Green", DisplayMode::Green),
             ("blue", "Blue", DisplayMode::Blue),
         ] {
-            pick(ui, &mut out, &format!("display.{k}"), l, mode == Some(m));
+            pick(ui, &mut out, &format!("display.{k}"), app.tr(l), mode == Some(m));
         }
     });
     if w == Which::Program {
-        pick(ui, &mut out, "display.multicam", "Multi-Camera", v.multicam);
-        pick(ui, &mut out, "display.comparison", "Comparison View", mode == Some(DisplayMode::Comparison));
+        pick(ui, &mut out, "display.multicam", app.tr("Multi-Camera"), v.multicam);
+        pick(ui, &mut out, "display.comparison", app.tr("Comparison View"), mode == Some(DisplayMode::Comparison));
     } else {
-        pick(ui, &mut out, "display.audioWaveform", "Audio Waveform", mode == Some(DisplayMode::AudioWaveform));
-        pick(ui, &mut out, "display.videoAndWaveform", "Video and Audio Waveform Split", mode == Some(DisplayMode::VideoAndWaveform));
+        pick(ui, &mut out, "display.audioWaveform", app.tr("Audio Waveform"), mode == Some(DisplayMode::AudioWaveform));
+        pick(ui, &mut out, "display.videoAndWaveform", app.tr("Video and Audio Waveform Split"), mode == Some(DisplayMode::VideoAndWaveform));
     }
     ui.separator();
-    ui.menu_button("Playback Resolution", |ui| {
+    ui.menu_button(app.tr("Playback Resolution"), |ui| {
         for (k, r) in RES_NAMES {
-            pick(ui, &mut out, &format!("playbackRes.{k}"), r.label(), v.res == r);
+            pick(ui, &mut out, &format!("playbackRes.{k}"), app.tr(r.label()), v.res == r);
         }
     });
-    ui.menu_button("Paused Resolution", |ui| {
+    ui.menu_button(app.tr("Paused Resolution"), |ui| {
         for (k, r) in RES_NAMES {
-            pick(ui, &mut out, &format!("pausedRes.{k}"), r.label(), v.paused_res == r);
+            pick(ui, &mut out, &format!("pausedRes.{k}"), app.tr(r.label()), v.paused_res == r);
         }
     });
-    pick(ui, &mut out, "highQualityPlayback", "High Quality Playback", v.high_quality);
+    pick(ui, &mut out, "highQualityPlayback", app.tr("High Quality Playback"), v.high_quality);
     ui.separator();
-    pick(ui, &mut out, "showRulers", "Show Rulers", v.show_rulers);
-    pick(ui, &mut out, "showGuides", "Show Guides", v.show_guides);
+    pick(ui, &mut out, "showRulers", app.tr("Show Rulers"), v.show_rulers);
+    pick(ui, &mut out, "showGuides", app.tr("Show Guides"), v.show_guides);
     if !v.guides.is_empty() {
-        pick(ui, &mut out, "lockGuides", "Lock Guides", v.lock_guides);
-        pick(ui, &mut out, "clearGuides", "Clear Guides", false);
+        pick(ui, &mut out, "lockGuides", app.tr("Lock Guides"), v.lock_guides);
+        pick(ui, &mut out, "clearGuides", app.tr("Clear Guides"), false);
     }
     if w == Which::Program {
         pick(ui, &mut out, "snapInProgramMonitor", "Snap in Program Monitor", v.snap);

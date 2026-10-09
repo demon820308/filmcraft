@@ -408,11 +408,11 @@ fn body(app: &mut FilmcraftApp, ui: &mut egui::Ui, rect: Rect, v: &View, actions
     let search_rect = Rect::from_min_size(row.min, vec2(sw, 22.0));
     let mut child = ui.new_child(egui::UiBuilder::new().max_rect(search_rect).id_salt((&pre, "search")));
     let mut q = app.ui.project_search.clone();
-    crate::widgets::search_field(&mut child, &mut q, "Search", search_rect.width(), &t);
+    crate::widgets::search_field(&mut child, &mut q, app.tr("Search"), search_rect.width(), &t);
     app.ui.project_search = q;
     app.auto.add(&format!("{pre}.search"), search_rect, "Search");
     let find = Rect::from_min_size(pos2(search_rect.max.x + 8.0, row.min.y), vec2(24.0, 22.0));
-    let fr = ui.interact(find, egui::Id::new((&pre, "find")), Sense::click()).on_hover_text("Find…");
+    let fr = ui.interact(find, egui::Id::new((&pre, "find")), Sense::click()).on_hover_text(app.tr("Find…"));
     app.auto.add(&format!("{pre}.find"), find, "Find…");
     if fr.hovered() {
         ui.painter().rect_filled(find, 3.0, t.hover);
@@ -424,7 +424,13 @@ fn body(app: &mut FilmcraftApp, ui: &mut egui::Ui, rect: Rect, v: &View, actions
     let filter = app.ui.project_search.to_ascii_lowercase();
     let total = count_items(app, v.bin);
     let sel = app.session.state.project_selection.len();
-    let count = if sel > 0 { format!("{sel} of {total} items selected") } else { format!("{total} items") };
+    let count = if app.ui.language == crate::i18n::Language::ZhCn {
+        if sel > 0 { format!("已选择 {total} 项中的 {sel} 项") } else { format!("{total} 项") }
+    } else if sel > 0 {
+        format!("{sel} of {total} items selected")
+    } else {
+        format!("{total} items")
+    };
     ui.painter().text(pos2(row.max.x, row.center().y - 1.0), Align2::RIGHT_CENTER, &count, Tokens::ui(fs - 1.0), t.text_dim);
     app.auto.add(&format!("{pre}.count"), Rect::from_min_max(pos2(row.max.x - 160.0, row.min.y), row.max), &count);
 
@@ -543,8 +549,9 @@ fn footer(app: &mut FilmcraftApp, ui: &mut egui::Ui, bar: Rect, v: &View, action
         [(Icon::ListView, ViewMode::List, "List View"), (Icon::IconView, ViewMode::Icon, "Icon View"), (Icon::Freeform, ViewMode::Freeform, "Freeform View")]
     {
         let r = Rect::from_min_size(pos2(x, bar.min.y + 5.0), vec2(26.0, 22.0));
-        let resp = ui.interact(r, egui::Id::new((pre, "pv", tip)), Sense::click()).on_hover_text(tip);
-        app.auto.add(&format!("{pre}.view.{mode:?}"), r, tip);
+        let tr_tip = app.tr(tip);
+        let resp = ui.interact(r, egui::Id::new((pre, "pv", tip)), Sense::click()).on_hover_text(tr_tip);
+        app.auto.add(&format!("{pre}.view.{mode:?}"), r, tr_tip);
         if v.mode == mode {
             ui.painter().rect_filled(r, 4.0, t.pressed);
         } else if resp.hovered() {
@@ -561,7 +568,7 @@ fn footer(app: &mut FilmcraftApp, ui: &mut egui::Ui, bar: Rect, v: &View, action
     let sr = Rect::from_min_size(pos2(x + 8.0, bar.min.y + 8.0), vec2(sw, 16.0));
     let mut sz = v.icon_size;
     let resp = ui.put(sr, egui::Slider::new(&mut sz, 48.0..=400.0).show_value(false));
-    app.auto.add(&format!("{pre}.iconSize"), sr, "Zoom");
+    app.auto.add(&format!("{pre}.iconSize"), sr, app.tr("Zoom"));
     if sz != v.icon_size {
         match v.inst {
             Inst::Main => app.session.prefs.project_panel.view.icon_size = sz,
@@ -575,8 +582,8 @@ fn footer(app: &mut FilmcraftApp, ui: &mut egui::Ui, bar: Rect, v: &View, action
     // Sort Icons (Icon view)
     if v.mode == ViewMode::Icon {
         let r = Rect::from_min_size(pos2(x, bar.min.y + 5.0), vec2(24.0, 22.0));
-        let resp = ui.interact(r, egui::Id::new((pre, "sortIcons")), Sense::click()).on_hover_text("Sort Icons");
-        app.auto.add(&format!("{pre}.sortIcons"), r, "Sort Icons");
+        let resp = ui.interact(r, egui::Id::new((pre, "sortIcons")), Sense::click()).on_hover_text(app.tr("Sort Icons"));
+        app.auto.add(&format!("{pre}.sortIcons"), r, app.tr("Sort Icons"));
         if resp.hovered() {
             ui.painter().rect_filled(r, 3.0, t.hover);
         }

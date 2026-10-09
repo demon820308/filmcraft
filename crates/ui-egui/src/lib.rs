@@ -289,6 +289,12 @@ pub fn gpu_compositor_unsupported(adapter: &eframe::wgpu::Adapter) -> Option<Str
 }
 
 impl FilmcraftApp {
+    /// Look up a translation for the current interface language.
+    #[inline]
+    pub fn tr<'a>(&self, text: &'a str) -> &'a str {
+        self.ui.language.tr(text)
+    }
+
     /// Enable the GPU compositor on the eframe wgpu device.
     pub fn set_wgpu(&mut self, rs: eframe::egui_wgpu::RenderState) {
         if let Some(why) = gpu_compositor_unsupported(&rs.adapter) {
@@ -1232,6 +1238,7 @@ impl FilmcraftApp {
         }
         self.handle_shortcuts(&ctx);
         self.advance_playback(&ctx);
+        ctx.data_mut(|d| d.insert_temp(egui::Id::new("interface-language"), self.ui.language));
         let t = self.tokens;
         let full = ui.max_rect();
         ui.painter().rect_filled(full, 0.0, t.app_bg);

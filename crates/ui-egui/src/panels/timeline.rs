@@ -1634,9 +1634,9 @@ fn multicam_menu(app: &mut FilmcraftApp, ui: &mut egui::Ui, picked: &[&TrackItem
     let shown = nests.first().and_then(|it| it.multicam).filter(|m| m.enabled).map(|m| m.angle as usize);
     let mut run: Option<(&str, Value)> = None;
     ui.add_enabled_ui(!nests.is_empty(), |ui| {
-        let r = ui.menu_button("Multi-Camera", |ui| {
+        let r = ui.menu_button(app.tr("Multi-Camera"), |ui| {
             for (label, cmd) in [(if enabled { "✓ Enable" } else { "Enable" }, "clip.multicamEnable"), ("Flatten", "clip.multicamFlatten")] {
-                let r = ui.add_enabled(app.session.is_enabled(cmd), egui::Button::new(label));
+                let r = ui.add_enabled(app.session.is_enabled(cmd), egui::Button::new(app.tr(label)));
                 app.auto.add(&format!("timeline.clipMenu.{cmd}"), r.rect, label);
                 if r.clicked() {
                     run = Some((cmd, json!({})));
@@ -2086,9 +2086,9 @@ fn interact(app: &mut FilmcraftApp, ui: &mut egui::Ui, seq: &Sequence, layout: &
             }
             for &(label, cmd) in *group {
                 if cmd == "edit.label" {
-                    ui.menu_button(label, |ui| {
+                    ui.menu_button(app.tr(label), |ui| {
                         for l in filmcraft_project::Label::ALL {
-                            if ui.button(l.name()).clicked() {
+                            if ui.button(app.tr(l.name())).clicked() {
                                 let _ = app.session.execute("edit.label", json!({"label": l.name()}));
                                 ui.close();
                             }
@@ -2105,7 +2105,7 @@ fn interact(app: &mut FilmcraftApp, ui: &mut egui::Ui, seq: &Sequence, layout: &
                     "clip.link" if linked => "Unlink",
                     _ => label,
                 };
-                let r = ui.add_enabled(!sel.is_empty() && app.session.is_enabled(cmd), egui::Button::new(label));
+                let r = ui.add_enabled(!sel.is_empty() && app.session.is_enabled(cmd), egui::Button::new(app.tr(label)));
                 app.auto.add(&format!("timeline.clipMenu.{cmd}"), r.rect, label);
                 if r.clicked() {
                     if let Err(e) = crate::menus::invoke(app, &ctx, cmd, json!({})) {

@@ -231,7 +231,7 @@ fn item_menu(app: &mut FilmcraftApp, ui: &mut egui::Ui, id: ItemId, kind: &ItemK
         actions.push(("clip.setPosterFrame".into(), h.map(|h| json!({"item": id.0, "time": h.time})).unwrap_or(json!({}))));
         ui.close();
     }
-    if ui.button("Interpret Footage…").clicked() {
+    if ui.button(app.tr("Interpret Footage…")).clicked() {
         actions.push(("clip.interpretFootage".into(), json!({"items": [id.0]})));
         ui.close();
     }
@@ -242,7 +242,7 @@ fn item_menu(app: &mut FilmcraftApp, ui: &mut egui::Ui, id: ItemId, kind: &ItemK
         _ => &[],
     };
     for (key, label, cmd) in subclip_items {
-        let b = ui.button(*label);
+        let b = ui.button(app.tr(label));
         app.auto.add(&format!("project.itemMenu.{key}"), b.rect, label);
         if b.clicked() {
             actions.push(("project.select".into(), sel()));
@@ -251,9 +251,9 @@ fn item_menu(app: &mut FilmcraftApp, ui: &mut egui::Ui, id: ItemId, kind: &ItemK
             ui.close();
         }
     }
-    ui.menu_button("Label", |ui| {
+    ui.menu_button(app.tr("Label"), |ui| {
         for l in filmcraft_project::Label::ALL {
-            if ui.button(l.name()).clicked() {
+            if ui.button(app.tr(l.name())).clicked() {
                 actions.push(("project.select".into(), json!({"items": [id.0]})));
                 actions.push(("edit.label".into(), json!({"label": l.name()})));
                 ui.close();
@@ -263,20 +263,20 @@ fn item_menu(app: &mut FilmcraftApp, ui: &mut egui::Ui, id: ItemId, kind: &ItemK
     if matches!(kind, ItemKind::Media(m) if matches!(m.media, filmcraft_project::MediaRef::File { .. })) {
         ui.separator();
         for (label, cmd) in [("Link Media…", "media.linkMedia"), ("Make Offline…", "media.makeOffline")] {
-            if ui.button(label).clicked() {
+            if ui.button(app.tr(label)).clicked() {
                 actions.push(("project.select".into(), sel()));
                 actions.push((cmd.into(), json!({})));
                 ui.close();
             }
         }
-        ui.menu_button("Proxy", |ui| {
+        ui.menu_button(app.tr("Proxy"), |ui| {
             for (label, cmd) in [
                 ("Create Proxies…", "media.createProxies"),
                 ("Attach Proxies…", "media.attachProxies"),
                 ("Reconnect Full Resolution Media…", "media.reconnectFullRes"),
                 ("Detach Proxies", "media.detachProxies"),
             ] {
-                if ui.button(label).clicked() {
+                if ui.button(app.tr(label)).clicked() {
                     actions.push(("project.select".into(), json!({"items": [id.0]})));
                     actions.push((cmd.into(), json!({})));
                     ui.close();
@@ -285,7 +285,7 @@ fn item_menu(app: &mut FilmcraftApp, ui: &mut egui::Ui, id: ItemId, kind: &ItemK
         });
     }
     ui.separator();
-    if ui.button("Clear").clicked() {
+    if ui.button(app.tr("Clear")).clicked() {
         actions.push(("project.delete".into(), json!({"items": [id.0]})));
         ui.close();
     }
@@ -293,7 +293,7 @@ fn item_menu(app: &mut FilmcraftApp, ui: &mut egui::Ui, id: ItemId, kind: &ItemK
 
 fn bin_menu(app: &mut FilmcraftApp, ui: &mut egui::Ui, v: &View, bin: u64, actions: &mut Actions) {
     for (label, how) in [("Open in Place", "inPlace"), ("Open in New Tab", "newTab"), ("Open in New Window", "newWindow")] {
-        let b = ui.button(label);
+        let b = ui.button(app.tr(label));
         app.auto.add(&format!("{}.binMenu.{how}", v.prefix), b.rect, label);
         if b.clicked() {
             let r = open_bin(app, v.inst, bin, Some(&format!("open{}{}", how[..1].to_uppercase(), &how[1..])), egui::Modifiers::NONE);
@@ -304,11 +304,11 @@ fn bin_menu(app: &mut FilmcraftApp, ui: &mut egui::Ui, v: &View, bin: u64, actio
         }
     }
     ui.separator();
-    if ui.button("Rename").clicked() {
+    if ui.button(app.tr("Rename")).clicked() {
         actions.push(("projectPanel.rename".into(), json!({"bin": bin})));
         ui.close();
     }
-    if ui.button("New Bin").clicked() {
+    if ui.button(app.tr("New Bin")).clicked() {
         actions.push(("file.newBin".into(), json!({"name": "New Bin", "parent": bin})));
         ui.close();
     }
@@ -619,7 +619,7 @@ fn list_bin(app: &mut FilmcraftApp, ui: &mut egui::Ui, bin: &Bin, depth: usize, 
             let p = ui.painter().with_clip_rect(cr.shrink2(vec2(2.0, 0.0)).intersect(ui.clip_rect()));
             if c.name == "Label" {
                 p.rect_filled(Rect::from_center_size(pos2(cr.min.x + 12.0, cr.center().y), vec2(10.0, 10.0)), 2.0, label_color(app, it.label));
-                p.text(pos2(cr.min.x + 22.0, cr.center().y), Align2::LEFT_CENTER, it.label.name(), Tokens::ui(lc.font - 0.5), t.text_dim);
+                p.text(pos2(cr.min.x + 22.0, cr.center().y), Align2::LEFT_CENTER, app.tr(it.label.name()), Tokens::ui(lc.font - 0.5), t.text_dim);
             } else {
                 let (text, _) = pp::cell(&app.session.project, &it, &c.name);
                 p.text(pos2(cr.min.x + 6.0, cr.center().y), Align2::LEFT_CENTER, text, Tokens::ui(lc.font - 0.5), t.text_dim);
@@ -773,7 +773,8 @@ fn bin_card(app: &mut FilmcraftApp, ui: &mut egui::Ui, r: Rect, b: &Bin, v: &Vie
     let nr = Rect::from_min_max(pos2(th.min.x, th.max.y + 2.0), pos2(th.max.x, th.max.y + 20.0));
     if !rename_field(app, ui, nr, None, Some(b.id.0), &v.prefix) {
         ui.painter().with_clip_rect(nr).text(pos2(th.min.x, th.max.y + 11.0), Align2::LEFT_CENTER, &b.name, Tokens::ui(f - 0.5), t.text);
-        ui.painter().text(pos2(th.max.x, th.max.y + 11.0), Align2::RIGHT_CENTER, format!("{} items", n.len()), Tokens::ui(f - 1.5), t.text_dim);
+        let count_str = if app.ui.language == crate::i18n::Language::ZhCn { format!("{} 项", n.len()) } else { format!("{} items", n.len()) };
+        ui.painter().text(pos2(th.max.x, th.max.y + 11.0), Align2::RIGHT_CENTER, count_str, Tokens::ui(f - 1.5), t.text_dim);
     }
     app.auto.add(&format!("{}.bin.{}", v.prefix, b.id.0), th, &b.name);
     accept_bin_drop(app, ui, th, b.id.0, actions);
