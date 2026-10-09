@@ -76,7 +76,7 @@ pub fn show(app: &mut FilmcraftApp, ui: &mut egui::Ui, rect: Rect) {
     let mut bui = ui.new_child(egui::UiBuilder::new().max_rect(body).id_salt("ec-body"));
     bui.set_clip_rect(Rect::from_min_max(body.min, pos2(rect.max.x, body.max.y)));
     let mt_now = it.source_time_at(ph.clamp(it.start, it.end() - Tick(1)));
-    let heading = if kind == filmcraft_project::TrackKind::Video { "Video" } else { "Audio" };
+    let heading = if kind == filmcraft_project::TrackKind::Video { app.tr("Video") } else { app.tr("Audio") };
     bui.painter().text(pos2(body.min.x + 8.0, body.min.y + 8.0), Align2::LEFT_CENTER, heading, Tokens::semibold(11.5), t.text_dim);
     bui.add_space(18.0);
     // Premiere lists the fixed effects (Motion, Opacity, Time Remapping / Volume…) first.
@@ -296,9 +296,10 @@ pub(crate) fn param_row(
         }
         (ParamKind::Choice(opts), ParamValue::Choice(c)) => {
             let mut sel = *c as usize;
-            egui::ComboBox::from_id_salt(id).selected_text(opts.get(sel).copied().unwrap_or("")).width(130.0).show_ui(&mut vui, |ui| {
+            let current = opts.get(sel).copied().unwrap_or("");
+            egui::ComboBox::from_id_salt(id).selected_text(app.tr(current)).width(130.0).show_ui(&mut vui, |ui| {
                 for (i, o) in opts.iter().enumerate() {
-                    if ui.selectable_value(&mut sel, i, *o).changed() {
+                    if ui.selectable_value(&mut sel, i, app.tr(*o)).changed() {
                         set = Some(json!(i));
                     }
                 }

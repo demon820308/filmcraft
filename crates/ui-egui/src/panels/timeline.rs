@@ -894,6 +894,7 @@ fn draw_transition(p: &egui::Painter, r: Rect, trn: &filmcraft_project::Transiti
     cp.rect_stroke(r, 0.0, Stroke::new(1.0, Color32::from_rgb(0xeb, 0xeb, 0xeb)), StrokeKind::Inside);
     if r.width() > 34.0 && !audio {
         let name = trn.effect.def().map(|d| d.name).unwrap_or(&trn.effect.effect);
+        let name = crate::i18n::tr_ctx(p.ctx(), name);
         let tr = Rect::from_min_size(r.min + vec2(2.0, 2.0), vec2((r.width() - 4.0).min(80.0), 13.0));
         cp.rect_filled(tr, 0.0, Color32::from_black_alpha(170));
         cp.text(pos2(tr.min.x + 3.0, tr.center().y), Align2::LEFT_CENTER, name, Tokens::ui(10.5), Color32::from_rgb(0xd9, 0xd9, 0xd9));
@@ -1097,8 +1098,9 @@ fn draw_top(app: &mut FilmcraftApp, ui: &mut egui::Ui, rect: Rect, seq: &Sequenc
     ];
     for (icon, key, on, toggle, tip) in toggles {
         let r = Rect::from_min_size(pos2(x, y), vec2(28.0, 28.0));
-        let resp = ui.interact(r, egui::Id::new(("tl-toggle", key)), Sense::click()).on_hover_text(tip);
-        app.auto.add(&format!("timeline.toggle.{key}"), r, tip);
+        let tr_tip = app.tr(tip);
+        let resp = ui.interact(r, egui::Id::new(("tl-toggle", key)), Sense::click()).on_hover_text(tr_tip);
+        app.auto.add(&format!("timeline.toggle.{key}"), r, tr_tip);
         if toggle && on {
             p.rect_filled(r, 4.0, Color32::from_rgb(0x4b, 0x4b, 0x4b));
         } else if resp.hovered() {
@@ -1115,22 +1117,23 @@ fn draw_top(app: &mut FilmcraftApp, ui: &mut egui::Ui, rect: Rect, seq: &Sequenc
             };
         }
         if key == "settings" {
+            let lang = app.ui.language;
             egui::Popup::menu(&resp).show(|ui| {
-                ui.checkbox(&mut app.ui.timeline.show_thumbnails, "Show Video Thumbnails");
-                ui.checkbox(&mut app.ui.timeline.show_waveforms, "Show Audio Waveform");
+                ui.checkbox(&mut app.ui.timeline.show_thumbnails, lang.tr("Show Video Thumbnails"));
+                ui.checkbox(&mut app.ui.timeline.show_waveforms, lang.tr("Show Audio Waveform"));
                 ui.separator();
                 let mut te = app.session.state.show_through_edits;
-                let c = ui.checkbox(&mut te, "Show Through Edits");
-                app.auto.add("timeline.settings.showThroughEdits", c.rect, "Show Through Edits");
+                let c = ui.checkbox(&mut te, lang.tr("Show Through Edits"));
+                app.auto.add("timeline.settings.showThroughEdits", c.rect, lang.tr("Show Through Edits"));
                 if c.changed() {
                     let _ = app.session.execute("sequence.showThroughEdits", json!({"on": te}));
                 }
                 ui.separator();
-                if ui.button("Expand All Tracks").clicked() {
+                if ui.button(lang.tr("Expand All Tracks")).clicked() {
                     app.ui.timeline.video_track_h = 64.0;
                     app.ui.timeline.audio_track_h = 64.0;
                 }
-                if ui.button("Minimize All Tracks").clicked() {
+                if ui.button(lang.tr("Minimize All Tracks")).clicked() {
                     app.ui.timeline.video_track_h = 26.0;
                     app.ui.timeline.audio_track_h = 26.0;
                 }

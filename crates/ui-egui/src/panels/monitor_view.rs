@@ -685,7 +685,7 @@ pub fn wrench_items(app: &mut FilmcraftApp, ui: &mut egui::Ui, w: Which) {
         pick(ui, &mut out, "clearGuides", app.tr("Clear Guides"), false);
     }
     if w == Which::Program {
-        pick(ui, &mut out, "snapInProgramMonitor", "Snap in Program Monitor", v.snap);
+        pick(ui, &mut out, "snapInProgramMonitor", app.tr("Snap in Program Monitor"), v.snap);
     }
     ui.separator();
     let pfx = prefix(w);
@@ -703,7 +703,7 @@ pub fn zoom_menu(app: &mut FilmcraftApp, resp: &egui::Response, w: Which) {
     let mut out: Picks = Vec::new();
     egui::Popup::menu(resp).show(|ui| {
         ui.set_min_width(80.0);
-        pick(ui, &mut out, "fit", "Fit", zoom.is_none());
+        pick(ui, &mut out, "fit", app.tr("Fit"), zoom.is_none());
         ui.separator();
         for (k, z) in ZOOMS {
             pick(ui, &mut out, k, &format!("{k}%"), zoom == Some(z));
@@ -736,32 +736,32 @@ pub fn dialogs(app: &mut FilmcraftApp, ctx: &egui::Context) {
         GuideDialog::SaveTemplate { .. } => "Save Guides as Template",
         GuideDialog::Manage { .. } => "Manage Guides",
     };
-    egui::Window::new(title).collapsible(false).resizable(false).anchor(Align2::CENTER_CENTER, [0.0, 0.0]).show(ctx, |ui| match &mut d {
+    egui::Window::new(app.tr(title)).collapsible(false).resizable(false).anchor(Align2::CENTER_CENTER, [0.0, 0.0]).show(ctx, |ui| match &mut d {
         GuideDialog::Add { vertical, position, source } => {
             let m = if *source { "source" } else { "program" };
             ui.horizontal(|ui| {
-                ui.label("Orientation:");
-                let r = ui.radio(*vertical, "Vertical");
+                ui.label(app.tr("Orientation:"));
+                let r = ui.radio(*vertical, app.tr("Vertical"));
                 push(&mut elems, "guides.add.vertical", &r, "Vertical");
                 if r.clicked() {
                     *vertical = true;
                 }
-                let r = ui.radio(!*vertical, "Horizontal");
+                let r = ui.radio(!*vertical, app.tr("Horizontal"));
                 push(&mut elems, "guides.add.horizontal", &r, "Horizontal");
                 if r.clicked() {
                     *vertical = false;
                 }
             });
             ui.horizontal(|ui| {
-                ui.label("Position:");
+                ui.label(app.tr("Position:"));
                 let r = ui.add(egui::DragValue::new(position).speed(1.0).suffix(" px"));
                 push(&mut elems, "guides.add.position", &r, "Position");
             });
             ui.horizontal(|ui| {
-                let r = ui.button("Cancel");
+                let r = ui.button(app.tr("Cancel"));
                 push(&mut elems, "guides.add.cancel", &r, "Cancel");
                 close |= r.clicked();
-                let r = ui.button("OK");
+                let r = ui.button(app.tr("OK"));
                 push(&mut elems, "guides.add.ok", &r, "OK");
                 if r.clicked() {
                     act = Some((
@@ -774,15 +774,15 @@ pub fn dialogs(app: &mut FilmcraftApp, ctx: &egui::Context) {
         GuideDialog::SaveTemplate { name, source } => {
             let m = if *source { "source" } else { "program" };
             ui.horizontal(|ui| {
-                ui.label("Name:");
+                ui.label(app.tr("Name:"));
                 let r = ui.text_edit_singleline(name);
                 push(&mut elems, "guides.save.name", &r, "Name");
             });
             ui.horizontal(|ui| {
-                let r = ui.button("Cancel");
+                let r = ui.button(app.tr("Cancel"));
                 push(&mut elems, "guides.save.cancel", &r, "Cancel");
                 close |= r.clicked();
-                let r = ui.button("OK");
+                let r = ui.button(app.tr("OK"));
                 push(&mut elems, "guides.save.ok", &r, "OK");
                 if r.clicked() {
                     act = Some(("view.guideTemplates.save".into(), json!({"monitor": m, "name": name.clone()})));
@@ -792,7 +792,7 @@ pub fn dialogs(app: &mut FilmcraftApp, ctx: &egui::Context) {
         GuideDialog::Manage { selected, source } => {
             let m = if *source { "source" } else { "program" };
             if templates.is_empty() {
-                ui.label("No saved guide templates.");
+                ui.label(app.tr("No saved guide templates."));
             }
             for (i, n) in templates.iter().enumerate() {
                 let r = ui.selectable_label(*selected == Some(i), n);
@@ -804,14 +804,14 @@ pub fn dialogs(app: &mut FilmcraftApp, ctx: &egui::Context) {
             ui.separator();
             ui.horizontal(|ui| {
                 let sel = selected.and_then(|i| templates.get(i)).cloned();
-                let r = ui.add_enabled(sel.is_some(), egui::Button::new("Apply"));
+                let r = ui.add_enabled(sel.is_some(), egui::Button::new(app.tr("Apply")));
                 push(&mut elems, "guides.manage.apply", &r, "Apply");
                 if r.clicked()
                     && let Some(n) = &sel
                 {
                     act = Some(("view.guideTemplates.apply".into(), json!({"monitor": m, "name": n})));
                 }
-                let r = ui.add_enabled(sel.is_some(), egui::Button::new("Delete"));
+                let r = ui.add_enabled(sel.is_some(), egui::Button::new(app.tr("Delete")));
                 push(&mut elems, "guides.manage.delete", &r, "Delete");
                 if r.clicked()
                     && let Some(n) = &sel
@@ -819,7 +819,7 @@ pub fn dialogs(app: &mut FilmcraftApp, ctx: &egui::Context) {
                     act = Some(("view.guideTemplates.delete".into(), json!({"name": n})));
                     *selected = None;
                 }
-                let r = ui.button("Close");
+                let r = ui.button(app.tr("Close"));
                 push(&mut elems, "guides.manage.close", &r, "Close");
                 close |= r.clicked();
             });
