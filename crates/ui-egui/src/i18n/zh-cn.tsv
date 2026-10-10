@@ -1454,3 +1454,519 @@
 	{n} min ago	{n} 分钟前
 	{n} s ago	{n} 秒前
 	✓ Enable	✓ 启用
+	Att	起音
+	Attack	起音时间
+	Auto Gate	自动噪声门
+	Auto Makeup	自动补偿增益
+	Clip Fx Editor	剪辑特效编辑器
+	Compressor	压缩器
+	Effect	效果
+	Expander	扩展器
+	Gain	增益
+	Hold	保持时间
+	Limiter	限制器
+	Limiter Release	限制器释放时间
+	Limiter Threshold	限制器阈值
+	Link Channels	链接声道
+	Makeup	增益补偿
+	Master Gain	主增益
+	Output Gain	输出增益
+	Ratio	比率
+	Rel	释放
+	Release	释放时间
+	Reset	重置
+	Soft Clip	软削波
+	Solo	独奏
+	Thr	阈值
+	Threshold	阈值
+	Track Fx Editor	轨道特效编辑器
+	in	输入
+	out	输出
+	Always Deinterlace	始终反交错
+	Clip Name:	剪辑名称：
+	Description:	描述：
+	Edit Subclip	编辑子剪辑
+	End:	结束：
+	Field Options	场选项
+	File Name:	文件名：
+	Flicker Removal	消除闪烁
+	Frame Rate:	帧速率：
+	Height:	高度：
+	Hold Filters	定格滤镜
+	Hold On	定格在
+	Media Start:	媒体起点：
+	Modify Clip: Audio Channels	修改剪辑：音频声道
+	Modify Clip: Timecode	修改剪辑：时间码
+	Nested Sequence Name	嵌套序列名称
+	New Offline File	新建脱机文件
+	Restrict Trims To Subclip Boundaries	将修剪限制在子剪辑边界内
+	Reverse Field Dominance	反转场序
+	Scale Attribute Times	按比例缩放属性时间
+	Sequence Time	序列时间
+	Set Timecode:	设置时间码：
+	Start:	起点：
+	Tape Name:	磁带名称：
+	Timecode:	时间码：
+	Use the file's timecode	使用文件的时间码
+	Width:	宽度：
+	% of all commits	% 占全部提交比例
+	Commits	提交数
+	Company	组织/公司
+	Grab bag	聚合概览
+	Lines +/−	代码增删行数 +/−
+	Model	模型
+	No contributor data was built into this copy.	此发行版本未内置贡献者统计数据。
+	No model credits were built into this copy.	此发行版本未内置模型致谢数据。
+	Reverse the order	反转排序
+	Show	显示
+	Sort	排序
+	Table	表格
+	Version	版本
+	About	关于
+	Contributors	贡献者
+	MIT OR Apache-2.0. Fonts: Inter, Noto Serif and JetBrains Mono (SIL OFL 1.1).	MIT 或 Apache-2.0 许可证。字体：Inter、Noto Serif 和 JetBrains Mono (SIL OFL 1.1)。
+	Models	模型
+	Auto Bezier	自动贝塞尔
+	Bezier	贝塞尔曲线
+	Continuous Bezier	连续贝塞尔
+	Linear	线性
+	Temporal Interpolation	时间插值
+	Value	数值
+	Velocity	速度
+	(Custom)	(自定义)
+	Assign an audio type to the selection:	为所选项分配音频类型：
+	Auto-Match	自动匹配
+	Clear Audio Type	清除音频类型
+	Clip Volume	剪辑音量
+	DeEss	消除齿音
+	DeHum	消除嗡嗡声
+	Duck against:	闪避目标：
+	EQ	均衡器 (EQ)
+	Fades	淡入淡出
+	Generate Keyframes	生成关键帧
+	High Tone	高音
+	Low Tone	低音
+	Mix	混合
+	Multiple Clips Selected	已选择多个剪辑
+	Not matched yet	尚未匹配
+	Reduce By	衰减量
+	Reduce Noise	降噪
+	Reduce Reverb	减少混响
+	Reduce Rumble	消除低频隆隆声
+	Remixing music to a target duration is not available yet. Trim the clip and add a crossfade instead.	音乐重混至目标时长功能暂不可用。请直接修剪剪辑并添加交叉淡入淡出。
+	Select audio clips, then click a preset to apply it.	选择音频剪辑，然后单击预设即可应用。
+	Sensitivity	灵敏度
+	The selected clips have different audio types. Assign one type to edit them together.	选中的剪辑具有不同的音频类型。请指定统一类型以一起编辑。
+	Untagged	未标记
+	Added to the export queue	已添加到导出队列
+	Auto	自动
+	Export presets	导出预设
+	Export: no file chosen (agents: export.presets.export {path, names})	导出：未选择文件（智能体调用：export.presets.export {path, names}）
+	Import: no file chosen (agents: export.presets.import {path})	导入：未选择文件（智能体调用：export.presets.import {path}）
+	Include Alpha Channel	包含 Alpha 通道
+	Main (8-bit; Main 10 for HDR sequences)	Main (8 位；HDR 序列使用 Main 10)
+	Main 10 (10-bit, HDR)	Main 10 (10 位，HDR)
+	Quick Export: open a sequence first	快速导出：请先打开一个序列
+	User	用户
+	   Angle	   角度
+	   Blur	   模糊
+	   Corner Radius	   圆角半径
+	   Distance	   距离
+	   Opacity	   不透明度
+	   Size	   大小
+	New Text	新建文本
+	Select a layer to edit its properties.	选择一个图层以编辑其属性。
+	Category:	类别：
+	Editable properties:	可编辑属性：
+	Export As Motion Graphics Template	导出为动态图形模板
+	FilmCraft Graphics Template	FilmCraft 图形模板
+	Fonts used in the project:	工程中使用的字体：
+	My Templates	我的模板
+	Replace Fonts in Projects	替换工程中的字体
+	Replace:	替换：
+	Saved as a FilmCraft graphics template (.fcgt) in your templates folder.	已作为 FilmCraft 图形模板 (.fcgt) 保存在您的模板文件夹中。
+	with:	替换为：
+	AAF Export Settings	AAF 导出设置
+	Audio File Format:	音频文件格式：
+	Audio:	音频：
+	Bits per Sample:	每采样位数：
+	Breakout to mono	拆分为单声道
+	Embed	嵌入
+	Encapsulate	封装
+	Handle Frames:	保留帧数（余量）：
+	Link to Media	链接到媒体
+	Mixdown video	缩减混音视频
+	OMF Export Settings	OMF 导出设置
+	OMF Title:	OMF 标题：
+	Render audio clip effects	渲染音频剪辑效果
+	Rendering:	渲染：
+	Sample Rate:	采样率：
+	Separate Audio	独立音频
+	Separate Files	独立文件
+	Trim audio files	修剪音频文件
+	Audio output failed: playing without sound (check Settings ▸ Audio Hardware)	音频输出失败：正在无声播放（请检查 设置 ▸ 音频硬件）
+	Audio output is not responding: playing without sound (check Settings ▸ Audio Hardware)	音频输出无响应：正在无声播放（请检查 设置 ▸ 音频硬件）
+	Continue	继续
+	FilmCraft hit an error	FilmCraft 遇到错误
+	Graphics problem: switched to software compositing	图形渲染异常：已自动切换为纯软件合成
+	Something went wrong while drawing the window. Your project is still open; save it to be safe.	绘制窗口时发生异常。您的工程仍在打开状态；建议立即保存以策安全。
+	Adjustments	调整
+	Apply Match	应用匹配
+	Blacks	黑色阶
+	Color Match	颜色匹配
+	Color/Black	颜色/黑色
+	Color/Gray	颜色/灰色
+	Contrast	对比度
+	Correction	校正
+	Denoise	降噪
+	Exposure	曝光
+	Face Detection (protect skin tones)	人脸检测（保护肤色）
+	Faded Film	淡化胶片
+	Feather	羽化
+	HDR	HDR
+	HDR Range	HDR 范围
+	HDR Specular	HDR 高光反射
+	HDR White	HDR 白场
+	Highlights	高光
+	Hue Range	色相范围
+	Hue Saturation Curves	色相饱和度曲线
+	Hue Shift	色相偏移
+	Hue vs Hue	色相与色相
+	Hue vs Luma	色相与亮度
+	Hue vs Sat	色相与饱和度
+	Input LUT	输入 LUT
+	Intensity	强度
+	Key	键控
+	LUT	LUT
+	Look	外观
+	Look LUT	外观 LUT
+	Luma Max	最大亮度
+	Luma Min	最小亮度
+	Luma vs Sat	亮度与饱和度
+	Midpoint	中点
+	Midtones	中间调
+	RGB Curves	RGB 曲线
+	Refine	精炼
+	Roundness	圆度
+	Sat vs Sat	饱和度与饱和度
+	Saturation Min	最小饱和度
+	Shadows	阴影
+	Show Mask	显示蒙版
+	Soften	柔和度
+	Temperature	色温
+	Vibrance	自然饱和度
+	White/Black	白色/黑色
+	Whites	白色阶
+	Click in the Program monitor to place mask points (drag for curves); click the first point or press Enter to close	在节目监视器中单击以添加蒙版控制点（拖动可拉出曲线）；单击第一个点或按 Enter 键即可闭合蒙版
+	Create 4-point polygon mask	创建 4 点多边形蒙版
+	Create ellipse mask	创建椭圆蒙版
+	Delete Mask	删除蒙版
+	Free draw bezier	自由绘制贝塞尔曲线
+	Inverted	已反转
+	Stop tracking	停止跟踪
+	Track selected mask backward	向后跟踪所选蒙版
+	Track selected mask backward 1 frame	向后跟踪所选蒙版 1 帧
+	Track selected mask forward	向前跟踪所选蒙版
+	Track selected mask forward 1 frame	向前跟踪所选蒙版 1 帧
+	  (none)	  (无)
+	 frames	 帧
+	All media is online.	所有媒体均已连接在线。
+	Clip ID (fingerprint)	剪辑 ID (指纹)
+	Collect Files and Copy to New Location	收集文件并复制到新位置
+	Consolidate and Transcode	合并并转码
+	Disk space: —	磁盘空间：—
+	Duration	持续时间
+	File Path	文件路径
+	Frame Size / Rate	帧大小 / 帧速率
+	Missing	缺失
+	Next to the original media, in a Proxies folder	与原始媒体同目录（位于 Proxies 文件夹）
+	No candidates yet — Search a folder or Locate the file.	暂无匹配候选项 — 请搜索文件夹或定位文件。
+	Nothing found with that name.	未找到具有该名称的文件。
+	Offline	脱机
+	Offline All	全部脱机
+	Preview	预览
+	Proxies are made in the background and attached when done. Export always uses full-resolution media.	代理将在后台制作并在完成后自动关联。导出时始终使用完整分辨率媒体。
+	Status	状态
+	✔ matches	✔ 匹配
+	✔ same file	✔ 相同文件
+	✖ different file	✖ 不同文件
+	 (unavailable)	 (不可用)
+	Action Safe Area	动作安全区
+	Action and Title Safe Areas	动作与字幕安全区
+	Action:	动作：
+	All	全部
+	Analyze	分析
+	Any	任意
+	Apply Default Audio Transition	应用默认音频过渡
+	Apply Default Video Transition	应用默认视频过渡
+	Apply a cut at each detected cut point	在每个检测到的剪辑点应用切点
+	At Unnumbered Markers	在未编号标记处
+	Audio Previews:	音频预览：
+	Audio Samples	音频采样
+	Audio analysis:	音频分析：
+	Audio effects	音频效果
+	Automate To Sequence	自动匹配到序列
+	Average Data Rate	平均数据速率
+	Avid Log Exchange	Avid 日志交换 (ALE)
+	Capture	捕获
+	Capture Format:	捕获格式：
+	Captured and Generated:	已捕获与已生成：
+	Case Sensitive	区分大小写
+	Clip Names	剪辑名称
+	Clip Names and Markers	剪辑名称与标记
+	Clip Overlap:	剪辑重叠：
+	Clips	剪辑
+	Color Matte Color	颜色遮罩颜色
+	Color:	颜色：
+	Colour	颜色
+	Comments:	注释：
+	Containers	容器
+	Copy and Create Proxies	复制并创建代理
+	Create Search Bin	创建搜索素材箱
+	Create a subclip for each detected cut point	为每个检测到的切点创建子剪辑
+	Decoders	解码器
+	Delete Search Bin	删除搜索素材箱
+	Destination:	目标：
+	Disabled clips	已禁用的剪辑
+	Display Format:	显示格式：
+	Edit Offline File	编辑脱机文件
+	Empty tracks	空轨道
+	Existing XMP files written by other applications are left unchanged.	其他应用程序写入的现有 XMP 文件保持不变。
+	Export formats	导出格式
+	File Size	文件大小
+	FilmCraft Project	FilmCraft 工程
+	Find	查找
+	Find in:	查找范围：
+	Find:	查找：
+	Flash Cue Marker	Flash 提示标记
+	Frames per Still:	每张静止图像帧数：
+	Gaps	间隙
+	General	常规
+	Generate clip markers at each detected cut point	在每个检测到的切点生成剪辑标记
+	Ignore Audio	忽略音频
+	Ignore Options	忽略选项
+	Ignore Video	忽略视频
+	Ingest Settings	收录设置
+	Insert Edit	插入编辑
+	Keep:	保留：
+	Language:	语言：
+	Log Note:	记录注释：
+	Match:	匹配：
+	Media	媒体
+	Media Name:	媒体名称：
+	Method:	方法：
+	Milliseconds	毫秒
+	Move clips to the lowest track possible	将剪辑移动到可能的最底轨道
+	New Color Matte	新建颜色遮罩
+	Next to the media	与媒体同目录
+	Normalize Mix Track	规范化混合音轨
+	Normalize Mix Track to:	规范化混合音轨至：
+	Ordering:	排序：
+	Overwrite Edit	覆盖编辑
+	Placement:	放置：
+	Project Auto Save:	工程自动保存：
+	Recognize when different speakers are talking	识别不同说话人发言
+	Renderer:	渲染器：
+	Same as Project	与工程相同
+	Save as Template	另存为模板
+	Scene Edit Detection	场景剪辑检测
+	Scene Edit Detection: analysing in the background (see Progress)	场景剪辑检测：正在后台分析（查看进度）
+	Scene:	场景：
+	Scratch Disks	暂存盘
+	Search:	搜索：
+	Selection Order	选择顺序
+	Sensitivity:	灵敏度：
+	Sequence Name:	序列名称：
+	Sequentially	按顺序
+	Shot/Take:	镜头/镜头拍摄：
+	Simplify	简化
+	Simplify Sequence	简化序列
+	Sort Order	排序顺序
+	Source Settings	源设置
+	System Compatibility Report	系统兼容性报告
+	Template Name:	模板名称：
+	Text (graphics and captions)	文本（图形和字幕）
+	Title Safe Area	字幕安全区
+	Total Duration	总持续时间
+	Transcode	转码
+	Transcribe Sequence	转录序列
+	Transitions	过渡
+	Type	类型
+	Update Metadata	更新元数据
+	Video Only	仅视频
+	Video Previews:	视频预览：
+	Video Rendering and Playback	视频渲染与回放
+	Video and Audio	视频与音频
+	Video effects	视频效果
+	no GPU adapter: the CPU compositor is used	未检测到 GPU 适配器：使用 CPU 合成器
+	All markers are hidden by the colour filter.	颜色过滤器已隐藏所有标记。
+	Codec:	编解码器：
+	Marker	标记
+	No markers. Press M to add one.	暂无标记。按 M 键可添加标记。
+	Open	打开
+	Playhead:	播放头：
+	Settings:	设置：
+	Type:	类型：
+	UI:	界面：
+	Video:	视频：
+	5.1 panner (drag the puck; double-click: front centre)	5.1 声道平移器（拖动旋钮；双击：正前方中置）
+	Enable track for recording	启用音轨进行录制
+	Fill the slots above first	请先填满上方插槽
+	Mute Send	静音发送
+	New Submix	新建子混合轨
+	Pan / balance (drag; double-click: centre)	声相 / 平衡（拖动；双击：居中）
+	Post-Fader	衰减后 (Post-Fader)
+	Pre-Fader	衰减前 (Pre-Fader)
+	Remove Effect	移除效果
+	Remove Send	移除发送
+	Solo safe	独奏保护 (Solo Safe)
+	Volume (drag; double-click: 0 dB)	音量（拖动；双击：0 dB）
+	Write keyframes	写入关键帧
+	pre 	前置 
+	Comparison	对比视图
+	Composite	合成视图
+	Export Frame	导出静止帧
+	Loop marked range	循环播放标记范围
+	Video and Waveform	视频与波形
+	(no audio)	(无音频)
+	Generating waveform…	正在生成波形…
+	Guides	参考线
+	All Cameras	所有机位
+	Camera 1	机位 1
+	Camera Angle Metadata	机位角度元数据
+	Camera Names	机位名称
+	Cameras shown in the Multi-Camera view (uncheck to hide).	多机位视图中显示的机位（取消选中可隐藏）。
+	Clip Marker	剪辑标记
+	Create Multi-Camera Source Sequence	创建多机位源序列
+	Edit Cameras	编辑机位
+	Enumerate Cameras	机位编号
+	Ignore Hours	忽略小时
+	In Points	入点
+	Merge Clips	合并剪辑
+	Merged clip created	已创建合并剪辑
+	Move source clips to Processed Clips bin	将源剪辑移动到“已处理剪辑”素材箱
+	Multi-Camera Record On/Off (0)	多机位录制 开/关 (0)
+	Multi-Camera Record off	多机位录制 关闭
+	Multi-Camera Record on	多机位录制 开启
+	Next page	下一页
+	No multi-camera clip at the playhead	播放头处无可用的多机位剪辑
+	Offset Audio by:	音频偏移量：
+	Offset:	偏移：
+	Out Points	出点
+	Previous page	上一页
+	Record	录制
+	Reference track:	参考轨道：
+	Remove Audio from AV Clip	从音视频剪辑中移除音频
+	Switch Audio	切换音频
+	Synchronize Clips	同步剪辑
+	Synchronize Point	同步点
+	first marker	第一个标记
+	lowest (V1…)	最底轨 (V1…)
+	Freeform	自由形式视图
+	Icon	图标视图
+	List	列表视图
+	Preview Area	预览区域
+	Thumbnail controls for all pointing devices	为所有指针设备显示缩略图控制器
+	Thumbnails	缩略图
+	Thumbnails show effects applied	缩略图显示已应用的效果
+	Media missing	媒体丢失
+	Unreadable	无法读取
+	Unstack	取消堆叠
+	Gang to Program	联动到节目监视器
+	Match Playhead	匹配播放头
+	Step Back 1 Frame	后退 1 帧
+	Step Forward 1 Frame	前进 1 帧
+	Fewer · More	更少 · 更多
+	Remix Properties	重混属性
+	Segments:	分段：
+	Target Duration:	目标时长：
+	Variations:	变化度：
+	Brightness	亮度
+	Clamp Signal	限制信号幅值
+	Colour Space	色彩空间
+	Histogram	直方图
+	Parade Type	分量示波器类型
+	Signal Scale	信号刻度
+	Vectorscope Targets	矢量示波器标靶
+	Waveform Type	波形类型
+	Auto Tone Map Media (HDR and log into SDR)	自动色调映射媒体（将 HDR 与 Log 映射到 SDR）
+	Captured View:	捕获视图：
+	Composite in Linear Color	在线性颜色空间中合成
+	Configure…	配置…
+	Maximum Bit Depth	最大位深度
+	Maximum Render Quality	最高渲染质量
+	Number of Channels:	声道数量：
+	Scale motion effects proportionally when changing frame size	更改帧大小时按比例缩放运动效果
+	Sequence Settings	序列设置
+	Working Color Space:	工作色彩空间：
+	horizontal	水平
+	vertical	垂直
+	Default location	默认位置
+	FilmCraft keeps the rest of the RAM free for other applications.	FilmCraft 会保留其余内存供其他应用程序使用。
+	Font family	字体族
+	Label Colors	标签颜色
+	Remove Media Cache Files	清除媒体缓存文件
+	Reset…	重置…
+	System Default	系统默认
+	not available in this session	在当前会话中不可用
+	 and 	 和 
+	Add another shortcut	添加另一个快捷键
+	Application shortcuts work whatever panel has focus	无论焦点位于哪个面板，应用程序快捷键均有效
+	Click a command's Shortcut cell and press keys to assign it; + adds another shortcut.	单击命令的“快捷键”单元格并按下按键即可分配；点击 + 可添加备用快捷键。
+	Click a key on the keyboard to see its shortcuts	单击键盘上的按键以查看其关联快捷键
+	Command	命令
+	Commands:	命令：
+	Export: no file chosen (agents: shortcuts.export {path})	导出：未选择文件（智能体调用：shortcuts.export {path}）
+	Import: no file chosen (agents: shortcuts.import {path})	导入：未选择文件（智能体调用：shortcuts.import {path}）
+	Key:	按键：
+	Keyboard: US	键盘：美式英语 (US)
+	Keyboard: US (macOS)	键盘：美式英语 (macOS)
+	Modifier held / selected	按住 / 选中的修饰键
+	Modifiers	修饰键
+	My Shortcuts	我的快捷键
+	No matching commands	无匹配命令
+	Nothing is assigned to this key	此按键尚未分配任何功能
+	Panel shortcuts override application shortcuts while that panel has focus	当某个面板拥有焦点时，该面板的快捷键将优先于应用程序快捷键
+	Save preset as:	预设另存为：
+	Search commands or keys	搜索命令或按键
+	Shortcut	快捷键
+	Type a shortcut… (Esc cancels)	请键入快捷键… (按 Esc 取消)
+	Align center	居中对齐
+	Align left	左对齐
+	Align right	右对齐
+	Position: bottom	位置：底部
+	Position: middle	位置：居中
+	Position: top	位置：顶部
+	Add a timecode row	添加时间码行
+	Remove Row	移除行
+	Double-click a sequence in the Project panel to open it here.	在工程面板中双击序列即可在此处打开。
+	Drop media here to create sequence.	将媒体拖放至此处以创建序列。
+	Open Demo Project	打开演示工程
+	Rendered preview	已渲染预览
+	Unrendered: render to play back in real time	未渲染：渲染后方可实时回放
+	Unrendered: should play back in real time	未渲染：应可正常实时回放
+	Clip Keyframes	剪辑关键帧
+	Show Keyframes	显示关键帧
+	Track Keyframes	音轨关键帧
+	(gap)	(间隙)
+	 seconds	 秒
+	Countdown Sound Cues	倒计时提示音
+	Default Input	默认输入
+	Discard take	舍弃录制镜头
+	Input:	输入：
+	Playback starts the pre-roll before the playhead (or the In point); with In/Out marked, recording punches in and out there.	播放将在播放头（或入点）前开始预卷；若标记了入/出点，录音将在该区间自动穿入穿出。
+	Post-roll	后卷
+	Post-roll:	后卷：
+	Pre-roll:	预卷：
+	Recording voice-over…	正在录制画外音…
+	Source:	来源：
+	Voice-Over Record Settings	画外音录制设置
+	Voice-Over Record Settings…	画外音录制设置…
+	Voice-over record (right-click: Voice-Over Record Settings…)	录制画外音（右键单击：画外音录制设置…）
+	Voice-over recording stopped (nothing recorded)	画外音录制已停止（未录入任何内容）
+	Voice-over take discarded	画外音录音已舍弃
+	● Recording	● 正在录制
+	Edit Workspaces	编辑工作区
+	New Workspace	新建工作区
+	Restore Original	恢复原始布局
+	Untitled Workspace	未命名工作区
