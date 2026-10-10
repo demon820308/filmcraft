@@ -137,12 +137,12 @@ pub fn show(app: &mut FilmcraftApp, ui: &mut egui::Ui, rect: Rect) {
     x = pr.max.x + 6.0;
     // file types
     let fr = Rect::from_min_size(pos2(x, bar.min.y + 1.0), vec2(150.0, 22.0));
-    let label = mb::FILE_TYPES.iter().find(|f| f.0 == prefs.file_types).map(|f| f.1.to_string()).unwrap_or_else(|| format!(".{}", prefs.file_types));
+    let label = mb::FILE_TYPES.iter().find(|f| f.0 == prefs.file_types).map(|f| crate::i18n::t(f.1).to_string()).unwrap_or_else(|| format!(".{}", prefs.file_types));
     let fresp = crate::widgets::dropdown_text(ui, fr, &label, &t, egui::Id::new("mb-types")).on_hover_text(tl!("File Types Displayed"));
     app.auto.add("mediaBrowser.fileTypes", fr, "File Types Displayed");
     egui::Popup::menu(&fresp).show(|ui| {
         for (k, l) in mb::FILE_TYPES {
-            let r = ui.selectable_label(prefs.file_types == k, l);
+            let r = ui.selectable_label(prefs.file_types == k, crate::i18n::t(l));
             app.auto.add(&format!("mediaBrowser.fileTypes.{k}"), r.rect, l);
             if r.clicked() {
                 exec(app, &ctx, "mediaBrowser.settings", json!({"fileTypes": k}));
