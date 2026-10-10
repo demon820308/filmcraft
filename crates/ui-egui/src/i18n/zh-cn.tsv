@@ -2029,7 +2029,7 @@
 	Linked {n} clip(s)	链接的 {n} 剪辑
 	Make {n} selected clip(s) offline. Their clips show the offline slate until you link them again.	使 {n} 选定的剪辑离线。他们的剪辑会显示离线状态，直到您再次链接它们为止。
 	{n} clip(s) selected.	已选择 {n} 剪辑。
-	Creating {n} proxy file(s)…	创建 {n} 代理文件...
+	Creating {n} proxy file(s)…	创建 {n} 代理文件…
 	Disk space: original {original} · resulting {result} ({n} files)	磁盘空间：原始 {original} · 生成的 {result}（{n} 文件）
 	Project Manager: writing {path}	项目经理：写{path}
 	{name} (user)	{name}（用户）
@@ -2319,7 +2319,7 @@
 	Delay 4	延迟4
 	Delete files older than	删除早于
 	Delete oldest files when the cache exceeds	当缓存超出时删除最旧的文件
-	Delete…	删除...
+	Delete…	删除…
 	Depth	深度
 	Desaturate	去饱和
 	Detail Amplitude	细节幅度
@@ -3564,3 +3564,6 @@
 	Play Source	播放源
 	Source Play/Stop	源播放/停止
 	Stop Source	停止源
+	New Sequence	新建序列
+	Tracks	轨道
+	tracks	轨道
